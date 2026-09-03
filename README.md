@@ -13,6 +13,7 @@ Trabajadores expuestos de la vía pública (obreros, recolectores, fiscalizadore
 
 ## Hipótesis del Dispositivo
 Un monitor portátil de bajo costo que traduzca el estrés térmico en alertas físicas directas para indicar momentos críticos de pausa a la sombra e hidratación[cite: 1].
+
 ##Desarrollo:
 -Esta problemática ocurriría en instancias de trabajo en ciudades, trabajo bajo el sol en verano en constante contacto con zonas asfaltadas. Esto afectará a trabajadores expuestos de la vía pública (obreros, recolectores, fiscalizadores de tránsito) en zonas de alta densidad urbana. Esto medirá los niveles de calor irradiados por el suelo asfaltado avisando para que estas altas temperaturas no sean absorbidas por el cuerpo humano.
 -¿Qué condiciones queremos observar?
