@@ -35,6 +35,10 @@ Absorción de luz solar (Albedo): El asfalto oscuro tiene un albedo muy bajo (0.
 
 <img width="1920" height="695" alt="Low tech" src="https://github.com/user-attachments/assets/7aa53528-a1be-4742-bbce-a6de1155f464" />
 
+## Algunos Referentes: 
+- 1.El Termómetro de Globo Negro de Vernon (1932): Esfera hueca de cobre pintada de negro mate con un termómetro dentro. Demostró que la temperatura del aire a la sombra ignora el calor radiante que absorbe la piel, sentando las bases del índice WBGT. 
+- 2.Smart Citizen Kit: Sensores abiertos orientados a mapear el microclima e islas de calor urbanas a escala de barrio. 
+<img width="1920" height="1080" alt="Rango WBGT (°C)" src="https://github.com/user-attachments/assets/9a0ca2e1-c7d9-4a08-8529-7ab319699d96" />
 
 
 ## Referencias y Fuentes Científicas
