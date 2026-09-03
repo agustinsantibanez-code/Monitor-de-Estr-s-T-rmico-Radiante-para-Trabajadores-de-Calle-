@@ -1,18 +1,18 @@
 # Monitor de Estrés Térmico Radiante para Trabajadores de Calle
 
-Dispositivo Low-Tech para medir el estrés térmico en trabajadores de la vía pública[cite: 1].
+Dispositivo Low-Tech para medir el estrés térmico en trabajadores de la vía pública.
 
 ## Problema
-Incongruencia entre la temperatura atmosférica oficial (medida a la sombra) y la temperatura radiante real a nivel del suelo que absorbe el cuerpo en zonas asfaltadas[cite: 1].
+Incongruencia entre la temperatura atmosférica oficial (medida a la sombra) y la temperatura radiante real a nivel del suelo que absorbe el cuerpo en zonas asfaltadas
 
 ## Contexto y Usuario
-Trabajadores expuestos de la vía pública (obreros, recolectores, fiscalizadores de tránsito) en zonas de alta densidad urbana[cite: 1].
+Trabajadores expuestos de la vía pública en zonas de alta densidad urbana.
 
 ## Variable a Medir
-Índice WBGT simplificado (*Wet Bulb Globe Temperature*), relacionando la radiación por absorción con la humedad y temperatura ambiental[cite: 1].
+Índice WBGT simplificado (*Wet Bulb Globe Temperature*), relacionando la radiación por absorción con la humedad y temperatura ambiental.
 
 ## Hipótesis del Dispositivo
-Un monitor portátil de bajo costo que traduzca el estrés térmico en alertas físicas directas para indicar momentos críticos de pausa a la sombra e hidratación[cite: 1].
+Un monitor portátil de bajo costo que traduzca el estrés térmico en alertas físicas directas para indicar momentos críticos de pausa a la sombra e hidratación.
 
 ## Desarrollo:
 - Esta problemática ocurriría en instancias de trabajo en ciudades, trabajo bajo el sol en verano en constante contacto con zonas asfaltadas. Esto afectará a trabajadores expuestos de la vía pública (obreros, recolectores, fiscalizadores de tránsito) en zonas de alta densidad urbana. Esto medirá los niveles de calor irradiados por el suelo asfaltado avisando para que estas altas temperaturas no sean absorbidas por el cuerpo humano.
