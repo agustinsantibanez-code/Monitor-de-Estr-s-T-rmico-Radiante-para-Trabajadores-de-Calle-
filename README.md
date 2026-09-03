@@ -31,7 +31,10 @@ El rango seguro del cuerpo está entre 36.5°C y 37.5°C. A partir de 38°C se p
 ## Radiación Infrarroja del Asfalto y Pavimentos:
 Absorción de luz solar (Albedo): El asfalto oscuro tiene un albedo muy bajo (0.05 a 0.10), lo que significa que absorbe entre el 90% y el 95% de la radiación solar incidente. 
 - Diferencial térmico: En días con temperatura del aire a la sombra de 30°C, la superficie del asfalto alcanza entre 50°C y 65°C.
-- Efecto Radiador Infrarrojo: El pavimento caliente irradia calor de onda larga continuo hacia los pies, piernas y torso del trabajador de calle, elevando drásticamente la Temperatura Radiante Media muy por encima de la medición del aire oficial.  
+- Efecto Radiador Infrarrojo: El pavimento caliente irradia calor de onda larga continuo hacia los pies, piernas y torso del trabajador de calle, elevando drásticamente la Temperatura Radiante Media muy por encima de la medición del aire oficial.
+
+  <img width="1920" height="1080" alt="Low tech" src="https://github.com/user-attachments/assets/7df79de3-e3d1-49fa-88eb-ca3529590f5e" />
+
 
 ## Referencias y Fuentes Científicas
 
