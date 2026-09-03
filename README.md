@@ -21,3 +21,18 @@ Se quiere medir la radiación térmica acumulada en la superficie, la brecha ent
 - ¿Por qué importa?
 Es importante ya que el calor extremo provoca agotamiento, deshidratación crónica y golpes de calor en las personas.
 
+## Fundamentos Biológicos: 
+Limites Fisiológicos del Cuerpo.
+Temperatura corporal interna:
+El rango seguro del cuerpo está entre 36.5°C y 37.5°C. A partir de 38°C se presenta agotamiento por calor, por sobre los 40°C ocurre el golpe de calor, con riesgo de falla multiorgánica.  
+- A los 35°C el cuerpo ya no se enfría por el aire si no que acude 100% al mecanismo del sudor y su evaporación.
+- Si la combinación de calor y humedad supera este umbral, el sudor deja de evaporarse. El cuerpo pierde la capacidad de enfriarse, acumulando calor de forma letal en pocas horas. 
+
+## Radiación Infrarroja del Asfalto y Pavimentos:
+Absorción de luz solar (Albedo): El asfalto oscuro tiene un albedo muy bajo (0.05 a 0.10), lo que significa que absorbe entre el 90% y el 95% de la radiación solar incidente. 
+- Diferencial térmico: En días con temperatura del aire a la sombra de 30°C, la superficie del asfalto alcanza entre 50°C y 65°C.
+- Efecto Radiador Infrarrojo: El pavimento caliente irradia calor de onda larga continuo hacia los pies, piernas y torso del trabajador de calle, elevando drásticamente la Temperatura Radiante Media muy por encima de la medición del aire oficial.  
+
+
+
+
