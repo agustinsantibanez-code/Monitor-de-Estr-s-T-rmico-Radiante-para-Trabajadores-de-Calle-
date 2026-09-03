@@ -33,6 +33,12 @@ Absorción de luz solar (Albedo): El asfalto oscuro tiene un albedo muy bajo (0.
 - Diferencial térmico: En días con temperatura del aire a la sombra de 30°C, la superficie del asfalto alcanza entre 50°C y 65°C.
 - Efecto Radiador Infrarrojo: El pavimento caliente irradia calor de onda larga continuo hacia los pies, piernas y torso del trabajador de calle, elevando drásticamente la Temperatura Radiante Media muy por encima de la medición del aire oficial.  
 
+## Referencias y Fuentes Científicas
+
+* [Criterios de Estrés Térmico Laboral (NIOSH)](https://www.cdc.gov/niosh/docs/2016-106/default.html)
+* [Estándar Internacional ISO 7243: Estrés Térmico](https://www.iso.org/standard/62635.html)
+* [Efecto Isla de Calor Urbana (EPA)](https://www.epa.gov/heatislands)
+* [Estudio de Tolerancia Térmica Humana (Penn State University)](https://journals.physiology.org/doi/full/10.1152/japplphysiol.00738.2021)
 
 
 
