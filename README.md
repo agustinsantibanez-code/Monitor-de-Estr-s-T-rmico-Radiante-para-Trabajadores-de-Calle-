@@ -49,4 +49,138 @@ Absorción de luz solar (Albedo): El asfalto oscuro tiene un albedo muy bajo (0.
 * [Estudio de Tolerancia Térmica Humana (Penn State University)](https://journals.physiology.org/doi/full/10.1152/japplphysiol.00738.2021)
 
 
+## 5. Modelo Matemático $WBGT_{est}$
+
+Para mantener la sobriedad técnica del dispositivo, se utiliza la fórmula simplificada de laboratorio para exposición solar directa:
+
+$$WBGT_{est} = 0.7 \cdot T_g + 0.3 \cdot T_a$$
+
+* **$T_g$ (Temperatura de Globo):** Capturada por el sensor dentro de la esfera negra mate ($\varnothing 4.0\text{ cm}$), integrando la radiación solar y la emitida por el asfalto.
+* **$T_a$ (Temperatura del Aire):** Capturada por el sensor protegido de la radiación directa mediante la rejilla de ventilación sombreada.
+
+---
+
+## 6. Diseño Industrial y Prototipado Físico 1:1
+
+### Ficha Técnica del Objeto
+* **Formato:** Cápsula monolítica ergonómica (*stadium-shaped*).
+* **Dimensiones Totales:** 15.5 cm(Alto) 5.8cm(Ancho) 3.8cm(Profundidad).
+* **Materialidad de Maqueta:** Cartulina
+
+
+     
+   <img width="1024" height="1024" alt="Gemini_Generated_Image_kzjzz4kzjzz4kzjz" src="https://github.com/user-attachments/assets/e7e0d23b-c1ee-4794-95df-c5fcb8617984" />
+## 7. Arquitectura Electrónica y Simulación Digital
+
+Debido a que Tinkercad no cuenta con soporte nativo para el protocolo OneWire (DS18B20), se realizó una **adaptación de hardware equivalente** para validar la lógica del circuito y las alertas:
+<img width="1917" height="907" alt="Captura de pantalla 2026-10-20 183952" src="https://github.com/user-attachments/assets/454b641c-0905-4bd3-a65c-245a7c788495" />
+<img width="1447" height="766" alt="Captura de pantalla 2026-10-20 181006" src="https://github.com/user-attachments/assets/0afa4536-4b46-4413-97be-c7165e1f2a8a" />
+### Tabla de Conexiones
+* **Potenciómetro (simulado):** Wiper central a Pin Analógico `A0`. Extremos a 5V y `GND`.
+* **TMP36:** Pin central V a Pin Analógico `A1`. Pines laterales a 5V y `GND`.
+* **LED Verde (Seguro):** Ánodo a Pin Digital `D5`; Cátodo a `GND` mediante resistencia de220.
+* **LED Amarillo (Precaución):** Ánodo a Pin Digital `D6`; Cátodo a `GND` mediante resistencia de 220.
+* **LED Rojo (Peligro):** Ánodo a Pin Digital `D7`; Cátodo a `GND` mediante resistencia de 220.
+* **Buzzer (Sonoro):** Positivo a Pin Digital `D8`; Negativo a `GND`.
+
+
+
+## 8. Registro de Depuración y Aprendizajes (Tinkercad)
+
+During testing, a critical current limit error was triggered in Tinkercad:
+`"La corriente a través de los pines de E/S D5 (100 mA) supera el máximo absoluto de 40.0 mA."`
+Fallo: El pin D5 presentaba una conexión directa al bus de 5V en la protoboard.
+
+Solución: Se eliminó el puente rojo en la columna 24 y se conectaron las resistencias
+de 220 Ohmios directamente entre el cátodo de cada LED y el riel negativo (GND).
+
+Optimización: Se reemplazó el DHT22 por el sensor analógico TMP36 para evitar
+incompatibilidades de librerías y asegurar compilación limpia en C++.
+<img width="1347" height="788" alt="Captura de pantalla 2026-10-20 194353" src="https://github.com/user-attachments/assets/ac8f4bdc-3d6e-4763-b3c8-dea3ee1b039b" />
+
+## 9. Próximos Pasos:
+Sustituir la simulación de Tinkercad por el circuito físico real integrando los sensores DS18B20 y DHT22. Soldar la circuitería definitiva sobre placa perforada (perfboard). Transferir el modelo de cartulina a termoformado en acrílico o impresión 3D con plástico reciclado. Realizar pruebas de campo midiendo temperatura radiante real sobre el asfalto en la vía pública.
+
+## 10. Código Fuente C++
+
+El código C++ compilado e implementado en el prototipo simulado es el siguiente:
+
+```cpp
+/*
+ * MONITOR DE ESTRÉS TÉRMICO WBGT LOW-TECH
+ * Curso: Dispositivos Low-Tech e Interfaces Interactivas - U. de Chile
+ * Configuración para Simulación en Tinkercad (Potenciómetro + TMP36)
+ */
+
+// --- Configuración de Pines ---
+#define POT_TG_PIN A0     // Potenciómetro (Simulación de Globo Tg)
+#define TMP_TA_PIN A1     // Sensor TMP36 (Temperatura Ambiental Ta)
+
+// Pines del Semáforo de Alerta
+#define LED_VERDE 5       // WBGT < 28°C (Normal)
+#define LED_AMARILLO 6    // 28°C <= WBGT < 31°C (Precaución / Hidratación)
+#define LED_ROJO 7        // WBGT >= 31°C (Peligro / Parar)
+#define BUZZER_PIN 8      // Zumbador Piezoeléctrico
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println(F("=============================================="));
+  Serial.println(F(" SIMULACIÓN WBGT LOW-TECH (POT + TMP36)       "));
+  Serial.println(F("=============================================="));
+
+  // Configurar pines del semáforo
+  pinMode(LED_VERDE, OUTPUT);
+  pinMode(LED_AMARILLO, OUTPUT);
+  pinMode(LED_ROJO, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+
+  // Test visual de inicio (Secuencia de LEDs)
+  digitalWrite(LED_VERDE, HIGH); delay(250); digitalWrite(LED_VERDE, LOW);
+  digitalWrite(LED_AMARILLO, HIGH); delay(250); digitalWrite(LED_AMARILLO, LOW);
+  digitalWrite(LED_ROJO, HIGH); delay(250); digitalWrite(LED_ROJO, LOW);
+}
+
+void loop() {
+  // 1. Simulación de Tg (Globo) mediante potenciómetro
+  int potRead = analogRead(POT_TG_PIN);
+  float Tg = map(potRead, 0, 1023, 20, 60); // Mapeado de 20°C a 60°C
+
+  // 2. Lectura del Sensor TMP36 (Temperatura Aire Ta)
+  int tmpRead = analogRead(TMP_TA_PIN);
+  float voltaje = tmpRead * (5.0 / 1024.0);   // Conversión a Voltios
+  float Ta = (voltaje - 0.5) * 100.0;          // Conversión a °C (TMP36)
+
+  // 3. Cálculo del WBGT Estimado
+  float wbgt_est = (0.7 * Tg) + (0.3 * Ta);
+
+  // 4. Muestra de Datos en el Monitor Serie
+  Serial.print(F("Tg (Globo Pot): ")); Serial.print(Tg, 1); Serial.print(F(" °C | "));
+  Serial.print(F("Ta (Aire TMP36): ")); Serial.print(Ta, 1); Serial.print(F(" °C || "));
+  Serial.print(F("WBGT_est: ")); Serial.print(wbgt_est, 1); Serial.println(F(" °C"));
+
+  // 5. Control de Alerta Visual y Sonora
+  if (wbgt_est < 28.0) {
+    actualizarSemaforo(HIGH, LOW, LOW); // Verde
+    noTone(BUZZER_PIN);
+  } 
+  else if (wbgt_est >= 28.0 && wbgt_est < 31.0) {
+    actualizarSemaforo(LOW, HIGH, LOW); // Amarillo
+    noTone(BUZZER_PIN);
+  } 
+  else {
+    actualizarSemaforo(LOW, LOW, HIGH); // Rojo
+    tone(BUZZER_PIN, 1000, 200);        // Beep de peligro
+  }
+
+  delay(1000); // Muestreo cada 1 segundo
+}
+
+void actualizarSemaforo(bool verde, bool amarillo, bool rojo) {
+  digitalWrite(LED_VERDE, verde);
+  digitalWrite(LED_AMARILLO, amarillo);
+  digitalWrite(LED_ROJO, rojo);
+}
+
+
+
 
