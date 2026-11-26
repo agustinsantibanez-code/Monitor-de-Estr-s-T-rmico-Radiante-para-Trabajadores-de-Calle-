@@ -250,3 +250,82 @@ Para resolver esta limitación y alinear el producto con una filosofía verdader
 * **Impacto en la replicabilidad:** Con este cambio, cualquier persona con acceso a los planos descargables del repositorio puede imprimir la plantilla, recortarla y ensamblar la carcasa completa en menos de una hora, consolidando un prototipo funcional, económico y reparable en el mismo entorno de trabajo.
 <img width="960" height="1280" alt="WhatsApp Image 2026-11-26 at 2 55 56 PM (1)" src="https://github.com/user-attachments/assets/9431c8ad-e2e2-477e-bf17-9fc030a7b3d1" />
 <img width="960" height="1280" alt="WhatsApp Image 2026-11-26 at 2 55 48 PM" src="https://github.com/user-attachments/assets/8531a147-f4c0-4ad5-a832-d35aac8c0687" />
+## . Código Fuente C++
+
+El código C++ compilado e implementado en el prototipo simulado es el siguiente:
+
+```cpp
+/*
+ * MONITOR DE ESTRÉS TÉRMICO WBGT LOW-TECH
+ * Curso: Dispositivos Low-Tech e Interfaces Interactivas - U. de Chile
+ * Configuración para Simulación en Tinkercad (Potenciómetro + TMP36)
+ */
+
+// --- Configuración de Pines ---
+#define POT_TG_PIN A0     // Potenciómetro (Simulación de Globo Tg)
+#define TMP_TA_PIN A1     // Sensor TMP36 (Temperatura Ambiental Ta)
+
+// Pines del Semáforo de Alerta
+#define LED_VERDE 5       // WBGT < 28°C (Normal)
+#define LED_AMARILLO 6    // 28°C <= WBGT < 31°C (Precaución / Hidratación)
+#define LED_ROJO 7        // WBGT >= 31°C (Peligro / Parar)
+#define BUZZER_PIN 8      // Zumbador Piezoeléctrico
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println(F("=============================================="));
+  Serial.println(F(" SIMULACIÓN WBGT LOW-TECH (POT + TMP36)       "));
+  Serial.println(F("=============================================="));
+
+  // Configurar pines del semáforo
+  pinMode(LED_VERDE, OUTPUT);
+  pinMode(LED_AMARILLO, OUTPUT);
+  pinMode(LED_ROJO, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+
+  // Test visual de inicio (Secuencia de LEDs)
+  digitalWrite(LED_VERDE, HIGH); delay(250); digitalWrite(LED_VERDE, LOW);
+  digitalWrite(LED_AMARILLO, HIGH); delay(250); digitalWrite(LED_AMARILLO, LOW);
+  digitalWrite(LED_ROJO, HIGH); delay(250); digitalWrite(LED_ROJO, LOW);
+}
+
+void loop() {
+  // 1. Simulación de Tg (Globo) mediante potenciómetro
+  int potRead = analogRead(POT_TG_PIN);
+  float Tg = map(potRead, 0, 1023, 20, 60); // Mapeado de 20°C a 60°C
+
+  // 2. Lectura del Sensor TMP36 (Temperatura Aire Ta)
+  int tmpRead = analogRead(TMP_TA_PIN);
+  float voltaje = tmpRead * (5.0 / 1024.0);   // Conversión a Voltios
+  float Ta = (voltaje - 0.5) * 100.0;          // Conversión a °C (TMP36)
+
+  // 3. Cálculo del WBGT Estimado
+  float wbgt_est = (0.7 * Tg) + (0.3 * Ta);
+
+  // 4. Muestra de Datos en el Monitor Serie
+  Serial.print(F("Tg (Globo Pot): ")); Serial.print(Tg, 1); Serial.print(F(" °C | "));
+  Serial.print(F("Ta (Aire TMP36): ")); Serial.print(Ta, 1); Serial.print(F(" °C || "));
+  Serial.print(F("WBGT_est: ")); Serial.print(wbgt_est, 1); Serial.println(F(" °C"));
+
+  // 5. Control de Alerta Visual y Sonora
+  if (wbgt_est < 28.0) {
+    actualizarSemaforo(HIGH, LOW, LOW); // Verde
+    noTone(BUZZER_PIN);
+  } 
+  else if (wbgt_est >= 28.0 && wbgt_est < 31.0) {
+    actualizarSemaforo(LOW, HIGH, LOW); // Amarillo
+    noTone(BUZZER_PIN);
+  } 
+  else {
+    actualizarSemaforo(LOW, LOW, HIGH); // Rojo
+    tone(BUZZER_PIN, 1000, 200);        // Beep de peligro
+  }
+
+  delay(1000); // Muestreo cada 1 segundo
+}
+
+void actualizarSemaforo(bool verde, bool amarillo, bool rojo) {
+  digitalWrite(LED_VERDE, verde);
+  digitalWrite(LED_AMARILLO, amarillo);
+  digitalWrite(LED_ROJO, rojo);
+}
